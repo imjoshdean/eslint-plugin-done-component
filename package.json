@@ -1,0 +1,23 @@
+{
+  "name": "eslint-plugin-can-component",
+  "version": "0.1.0",
+  "description": "An ESLint plugin to extract and lint scripts from .component files",
+  "keywords": [
+    "eslint-plugin",
+    "eslint",
+    "CanJS",
+    "component"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.12.2"
+  },
+  "dependencies": {
+    "htmlparser2": "^3.9.2"
+  }
+}
