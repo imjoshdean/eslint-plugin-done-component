@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-can-component",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An ESLint plugin to extract and lint scripts from .component files",
   "keywords": [
     "eslint-plugin",
