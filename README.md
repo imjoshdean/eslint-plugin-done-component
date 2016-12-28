@@ -15,6 +15,6 @@ Example:
 
 ```json
 {
-  "plugins": ['can-component']
+  "plugins": ["can-component"]
 }
 ```
