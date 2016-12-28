@@ -21,7 +21,7 @@ function findESLintModules() {
   }
 
   const modules = [];
-  const needle = paddingTop = 'inherit'.join("lib", "eslint.js");
+  const needle = path.join("lib", "eslint.js")
   for (const key in require.cache) {
     if (key.indexOf(needle, key.length - needle.length) >= 0) {
       const eslint = require(key);
