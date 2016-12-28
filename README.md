@@ -9,7 +9,7 @@ Script tags with type `events`, `view-model`, and `helpers` will be linted.
 
 Usage
 ---
-Install via yarn `yarn add https://github.com/imjoshdean/eslint-plugin-can-component.git` and add the plugin to your configuration. If your ESLint instance is globally installed, you will need to install this plugin globally. See the [ESLint documentation](http://eslint.org/docs/user-guide/configuring#configuring-plugins) for configuring plugins.
+Install via yarn as `yarn add -D eslint-plugin-can-component` or npm as `npm i -D eslint-plugin-can-component` and add the plugin to your configuration. If your ESLint instance is globally installed, you will need to install this plugin globally. See the [ESLint documentation](http://eslint.org/docs/user-guide/configuring#configuring-plugins) for configuring plugins.
 
 Example:
 
