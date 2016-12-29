@@ -44,7 +44,7 @@ function iterateScripts(code, options, onScript) {
         return;
       }
 
-      onScript(code.slice(index, parser.startIndex - currentScript.length - cdataSize), currentScript);
+      onScript(code.slice(0, parser.startIndex - currentScript.length - cdataSize), code.slice(index, parser.startIndex - currentScript.length - cdataSize), currentScript);
 
       index = parser.startIndex;
       currentScript = null;
@@ -66,18 +66,16 @@ function iterateScripts(code, options, onScript) {
 
 function extract(code, options) {
   const indentDescriptor = parseIndentDescriptor(options && options.indent);
-  const reportBadIndentation = options && options.reportBadIndent;
   let resultCode = "";
   let map = [];
   let lineNumber = 1;
-  let badIndentationLines = [];
   const codes = [];
 
-  iterateScripts(code, { }, (previousCode, scriptCode) => {
+  iterateScripts(code, { }, (allPreviousCode, previousCode, scriptCode) => {
     // Mark that we're inside a <script> a tag and push all new lines
     // in between the last </script> tag and this <script> tag to preserve
     // location information.
-    const newLines = previousCode.match(/\r\n|\n|\r/g);
+    const newLines = allPreviousCode.match(/\r\n|\n|\r/g);
     if (newLines) {
       resultCode += newLines.map((newLine) => {
         return `//eslint-disable-line${newLine}`;
@@ -87,7 +85,6 @@ function extract(code, options) {
     }
 
     const currentScriptIndent = previousCode.match(/([^\n\r]*)<[^<]*$/)[1];
-
     let indent;
     if (indentDescriptor.spaces === "auto") {
       const indentMatch = /[\n\r]+([ \t]*)/.exec(scriptCode);
@@ -100,49 +97,21 @@ function extract(code, options) {
       }
     }
 
-    let hadNonEmptyLine = false;
     resultCode += scriptCode
       .replace(/(\r\n|\n|\r)([ \t]*)(.*)/g, (_, newLineChar, lineIndent, lineText) => {
         lineNumber += 1;
 
-        const isNonEmptyLine = Boolean(lineText);
-        const isFirstNonEmptyLine = isNonEmptyLine && !hadNonEmptyLine;
-
-        const badIndentation =
-          // Be stricter on the first line
-          isFirstNonEmptyLine ?
-            indent !== lineIndent :
-            lineIndent.indexOf(indent) !== 0;
-
-        if (badIndentation) {
-          // Don't report line if the line is empty
-          if (reportBadIndentation && isNonEmptyLine) {
-            badIndentationLines.push(lineNumber);
-          }
-          map[lineNumber] = 0;
-        }
-        else {
-          // Dedent code
-          lineIndent = lineIndent.slice(indent.length);
-          map[lineNumber] = indent.length;
-        }
-
-        if (isNonEmptyLine) {
-          hadNonEmptyLine = true;
-        }
+        map[lineNumber] = indent.length;
 
         return newLineChar + lineIndent + lineText;
       })
       .replace(/[ \t]*$/, "");  // Remove spaces on the last line
-
     codes.push({
       map,
-      code: resultCode,
-      badIndentationLines
+      code: resultCode
     });
 
     map = [];
-    badIndentationLines = [];
     resultCode = "";
   })
 

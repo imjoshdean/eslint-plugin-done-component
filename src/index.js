@@ -88,7 +88,7 @@ function createProcessor() {
       patchedModules.forEach(unpatchModule);
       patchedModules = null;
       messages[0].forEach((message) => {
-        message.column += 0;//currentInfos.map[message.line] || 0;
+        message.column += currentInfos.map[message.line] || 0;
       });
 
       messages[0].sort((ma, mb) => {
