@@ -43,7 +43,6 @@ function findESLintModules() {
 function createProcessor() {
   let patchedModules = null;
   const originalVerifyMethods = new WeakMap();
-  let reportBadIndent;
 
   let currentInfos;
 
@@ -51,15 +50,17 @@ function createProcessor() {
     const originalVerify = module.verify;
 
     function patchedVerify(textOrSourceCode, config, filenameOrOptions, saveState) {
-      const indentDescriptor = config.settings && config.settings["html/indent"];
-      reportBadIndent = config.settings && config.settings["html/report-bad-indent"];
+      currentInfos = extract(textOrSourceCode, { });
 
-      currentInfos = extract(textOrSourceCode, {
-        indent: indentDescriptor,
-        reportBadIndent: Boolean(reportBadIndent)
+      const verified = currentInfos.map(info => {
+        return originalVerify.call(this, info.code, config, filenameOrOptions, saveState);
       });
 
-      return originalVerify.call(this, currentInfos.code, config, filenameOrOptions, saveState);
+      if (verified.length) {
+        return verified.reduce((a, b) => a.concat(b));
+      }
+
+      return verified;
     }
 
     originalVerifyMethods.set(module, originalVerify);
@@ -86,19 +87,8 @@ function createProcessor() {
     postprocess (messages) {
       patchedModules.forEach(unpatchModule);
       patchedModules = null;
-
       messages[0].forEach((message) => {
-        message.column += currentInfos.map[message.line] || 0;
-      });
-
-      currentInfos.badIndentationLines.forEach((line) => {
-        messages[0].push({
-          message: "Bad line indentation.",
-          line,
-          column: 1,
-          ruleId: "(html plugin)",
-          severity: reportBadIndent === true ? 2 : reportBadIndent
-        });
+        message.column += 0;//currentInfos.map[message.line] || 0;
       });
 
       messages[0].sort((ma, mb) => {

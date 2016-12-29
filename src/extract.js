@@ -68,9 +68,10 @@ function extract(code, options) {
   const indentDescriptor = parseIndentDescriptor(options && options.indent);
   const reportBadIndentation = options && options.reportBadIndent;
   let resultCode = "";
-  const map = [];
+  let map = [];
   let lineNumber = 1;
-  const badIndentationLines = [];
+  let badIndentationLines = [];
+  const codes = [];
 
   iterateScripts(code, { }, (previousCode, scriptCode) => {
     // Mark that we're inside a <script> a tag and push all new lines
@@ -133,13 +134,19 @@ function extract(code, options) {
         return newLineChar + lineIndent + lineText;
       })
       .replace(/[ \t]*$/, "");  // Remove spaces on the last line
+
+    codes.push({
+      map,
+      code: resultCode,
+      badIndentationLines
+    });
+
+    map = [];
+    badIndentationLines = [];
+    resultCode = "";
   })
 
-  return {
-    map,
-    code: resultCode,
-    badIndentationLines
-  };
+  return codes;
 }
 
 module.exports = extract;
