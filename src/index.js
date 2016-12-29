@@ -32,9 +32,9 @@ function findESLintModules() {
   }
 
   if (!modules.length) {
-    throw new Error("eslint-plugin-can-component error: It seems that eslint is not loaded. " +
+    throw new Error("eslint-plugin-done-component error: It seems that eslint is not loaded. " +
                     "If you think it is a bug, please file a report at " +
-                    "https://github.com/imjoshdean/eslint-plugin-can-component/issues");
+                    "https://github.com/imjoshdean/eslint-plugin-done-component/issues");
   }
 
   return modules;

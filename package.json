@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-can-component",
+  "name": "eslint-plugin-done-component",
   "version": "0.1.3",
-  "description": "An ESLint plugin to extract and lint scripts from .component files",
+  "description": "An ESLint plugin to extract and lint scripts from DoneJS's .component files",
   "keywords": [
     "eslint-plugin",
     "eslint",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imjoshdean/eslint-plugin-can-component.git"
+    "url": "git+https://github.com/imjoshdean/eslint-plugin-done-component.git"
   },
   "author": "Josh Dean <me@imjoshdean.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/imjoshdean/eslint-plugin-can-component/issues"
+    "url": "https://github.com/imjoshdean/eslint-plugin-done-component/issues"
   },
-  "homepage": "https://github.com/imjoshdean/eslint-plugin-can-component",
+  "homepage": "https://github.com/imjoshdean/eslint-plugin-done-component",
   "devDependencies": {
     "eslint": "^3.12.2"
   },
