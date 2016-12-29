@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-can-component",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "An ESLint plugin to extract and lint scripts from .component files",
   "keywords": [
     "eslint-plugin",
@@ -16,7 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/imjoshdean/eslint-plugin-can-component.git"
   },
-  "author": "Josh Dean <me@imjoshdean.com>",  "license": "MIT",
+  "author": "Josh Dean <me@imjoshdean.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/imjoshdean/eslint-plugin-can-component/issues"
   },
