@@ -1,0 +1,45 @@
+<can-component tag="sample-component">
+  <style type="less"></style>
+  <template>
+    <div class="field">
+      <label>
+        {{field}}
+        <input type="{{type}}">
+      </label>
+      <small>Last Edited at {{formatTime time}}</small>
+    </div>
+  </template>
+  <script type="view-model">
+    import 'can-map-define';
+
+    export default {
+      define: {
+        type: {
+          type: 'string',
+          value: 'text'
+        },
+        field: {
+          type: "string",
+          value: 'Name'
+        }
+      }
+    }
+  </script>
+  <script type="events">
+    export default {
+      'input blur': function (el, ev) {
+        this.viewModel.attr('time', new Date());
+      }
+    }
+  </script>
+  <script type="helpers">
+    import moment from 'moment';
+
+    export default {
+      formatTime: function (time) {
+        console.log(time);
+        return moment(time).format('dddd, MMMM Do YYYY, h:mm:ss a');
+      }
+    }
+  </script>
+</can-component>

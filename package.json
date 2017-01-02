@@ -10,7 +10,7 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/tests"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/imjoshdean/eslint-plugin-done-component",
   "devDependencies": {
-    "eslint": "^3.12.2"
+    "chai": "^3.5.0",
+    "eslint": "^3.12.2",
+    "mocha": "^3.2.0"
   },
   "dependencies": {
     "htmlparser2": "^3.9.2"
