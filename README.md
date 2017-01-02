@@ -1,6 +1,8 @@
 eslint-plugin-done-component
 ===
 
+[![Build Status](https://travis-ci.org/imjoshdean/eslint-plugin-done-component.svg?branch=master)](https://travis-ci.org/imjoshdean/eslint-plugin-done-component)
+
 _Borrowed from the [eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html) plugin_
 
 This [ESLint](http://eslint.org) plugin extracts and lints JavaScript in DoneJS's `*.component` files.
